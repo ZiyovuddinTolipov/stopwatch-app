@@ -1,10 +1,17 @@
-body {background: #2c3e50;}*{padding: 0px;margin: 0px;box-sizing: border-box;}
+body {
+  background: #2c3e50;
+}
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
 
 .main-section {
   background: transparent;
   max-width: 600px;
   width: 90%;
-  // height: 500px;
+  height: 500px;
   margin: 30px auto;
 
   .clock-holder {
