@@ -5,15 +5,18 @@ import BtnDisplayComponent from './Components/BtnDisplayComponent';
 
 function App() {
   const [time, setTime] = useState({ ms: 0, s: 0, m: 0, h: 0 });
-  
-  
+  const [interv, setInterv] = useState();
+  const [status, setStatus] = useState(0);
+
   const start = () => {
     run();
-    setInterval(run, 10);
+    setStatus(1);
+    setInterv(setInterval(run, 10));
   };
 
+
   let updatedMs = time.ms, updatedS = time.s, updatedM = time.m, updatedH = time.h;
-  
+
   const run = () => {
     if (updatedM === 60) {
       updatedH++;
@@ -31,13 +34,26 @@ function App() {
     return setTime({ ms: updatedMs, s: updatedS, m: updatedM, h: updatedH });
   };
 
+  const stop = () => {
+    clearInterval(interv);
+    setStatus(2);
+  };
+
+  // reset interval
+  const reset = () => {
+    clearInterval(interv);
+    setStatus(0);
+    setTime({ ms: 0, s: 0, m: 0, h: 0 });
+  };
+  const resume = () => start();
+
 
   return (
     <div className="main-section">
       <div className='clock-holder'>
         <div className='stopwatch'>
           <DisplayComponent time={time} />
-          <BtnDisplayComponent start={start} />
+          <BtnDisplayComponent status={status} stop={stop} reset={reset} resume={resume} start={start} />
 
         </div>
       </div>
